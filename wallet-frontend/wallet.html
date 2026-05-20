@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+
+  <title>Wallet</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="wallet.css" />
+
+</head>
+
+<body class="violet">
+
+  <div class="container">
+
+    <div class="header">
+
+      <div class="header-left">
+
+        <h1>
+          Wallet 
+          <span class="brand-icon-container">
+            <svg class="brand-svg-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" x2="100%">
+                  <stop offset="0%" stop-color="var(--violet)" />
+                  <stop offset="100%" stop-color="var(--pink)" />
+                </linearGradient>
+              </defs>
+              <path d="M19 7H5C3.89543 7 3 7.89543 3 9V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V9C21 7.89543 20.1046 7 19 7Z" stroke="url(#iconGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3 11H21" stroke="url(#iconGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 14H18" stroke="url(#iconGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 3H5C3.89543 3 3 3.89543 3 5V7" stroke="url(#iconGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </h1>
+
+        <p>
+          Smart Dynamic Budget Calendar
+        </p>
+
+      </div>
+
+
+      <div class="header-actions">
+
+        <div class="dropdown-container">
+
+          <button
+            class="dropdown-toggle"
+            onclick="toggleBudgetDropdown()"
+          >
+            Budget Setup
+          </button>
+
+          <div
+            class="dropdown-menu budget-dropdown"
+            id="budgetDropdown"
+          >
+
+            <div class="setup-section">
+
+              <label>
+                Salary Cycle Type
+              </label>
+
+              <select
+                id="salaryCycle"
+                onchange="handleSalaryCycleChange()"
+              >
+                <option value="cutoff">Per Cutoff</option>
+                <option value="monthly">Monthly</option>
+              </select>
+
+            </div>
+
+
+            <div id="monthlyConfigSection" style="display:none;">
+
+              <div class="setup-section">
+
+                <label>
+                  Total Monthly Budget
+                </label>
+
+                <input
+                  type="number"
+                  id="totalBudgetInput"
+                  min="0"
+                  value="15000"
+                />
+
+              </div>
+
+            </div>
+
+
+            <div id="cutoffConfigSection">
+
+              <div class="cutoff-group-card">
+                
+                <span class="cutoff-group-title">1st Cutoff Period</span>
+                
+                <div class="setup-section-row">
+                  <div>
+                    <label>Start</label>
+                    <input type="number" id="cutoff1Start" min="1" max="31" value="1" />
+                  </div>
+                  <div>
+                    <label>End</label>
+                    <input type="number" id="cutoff1End" min="1" max="31" value="15" />
+                  </div>
+                </div>
+
+                <div class="setup-section" style="margin-top: 10px;">
+                  <label>Cutoff Allocation (₱)</label>
+                  <input type="number" id="cutoff1Budget" min="0" value="10000" />
+                </div>
+
+              </div>
+
+              <div class="cutoff-group-card">
+                
+                <span class="cutoff-group-title">2nd Cutoff Period</span>
+                
+                <div class="setup-section-row">
+                  <div>
+                    <label>Start</label>
+                    <input type="number" id="cutoff2Start" min="1" max="31" value="16" />
+                  </div>
+                  <div>
+                    <label>End</label>
+                    <input type="number" id="cutoff2End" min="1" max="31" value="31" />
+                  </div>
+                </div>
+
+                <div class="setup-section" style="margin-top: 10px;">
+                  <label>Cutoff Allocation (₱)</label>
+                  <input type="number" id="cutoff2Budget" min="0" value="8000" />
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="setup-section" style="margin-top: 14px;">
+
+              <label>
+                Rollover Mode
+              </label>
+
+              <select id="rolloverMode">
+
+                <option value="full">
+                  Full Daily Rollover
+                </option>
+
+                <option value="distributed">
+                  Distributed Rollover
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <button
+              class="save-budget-btn"
+              onclick="applyBudgetSettings()"
+            >
+              Apply Budget System
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="dropdown-container">
+
+          <button
+            class="dropdown-toggle"
+            onclick="toggleThemeDropdown()"
+          >
+            Themes
+          </button>
+
+          <div
+            class="dropdown-menu theme-dropdown"
+            id="themeDropdown"
+          >
+
+            <div class="theme-grid">
+
+              <div
+                class="theme-card violet-theme active-theme"
+                onclick="changeTheme('violet', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Violet Neon</p>
+
+              </div>
+
+
+              <div
+                class="theme-card emerald-theme"
+                onclick="changeTheme('emerald', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Emerald Luxe</p>
+
+              </div>
+
+
+              <div
+                class="theme-card ocean-theme"
+                onclick="changeTheme('ocean', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Ocean Blue</p>
+
+              </div>
+
+
+              <div
+                class="theme-card sunset-theme"
+                onclick="changeTheme('sunset', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Sunset Gold</p>
+
+              </div>
+
+
+              <div
+                class="theme-card crimson-theme"
+                onclick="changeTheme('crimson', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Crimson Red</p>
+
+              </div>
+
+
+              <div
+                class="theme-card cyber-theme"
+                onclick="changeTheme('cyber', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Cyber Punk</p>
+
+              </div>
+
+
+              <div
+                class="theme-card mint-theme"
+                onclick="changeTheme('mint', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Mint Glass</p>
+
+              </div>
+
+
+              <div
+                class="theme-card midnight-theme"
+                onclick="changeTheme('midnight', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Midnight Gold</p>
+
+              </div>
+
+
+              <div
+                class="theme-card rose-theme"
+                onclick="changeTheme('rose', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Rose Luxury</p>
+
+              </div>
+
+
+              <div
+                class="theme-card ice-theme"
+                onclick="changeTheme('ice', this)"
+              >
+
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <p>Ice Silver</p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="fixed-expense-nav-btn"
+      onclick="window.location.href='fixed-expenses.html'"
+    >
+      <i class="fa-solid fa-file-invoice-dollar"></i>
+      <span>Fixed Expenses</span>
+    </button>
+        
+    <button class="logout-btn" onclick="logout()">
+      Logout
+    </button>
+
+    <div class="context-banner-card" id="contextBannerCard">
+      <div class="banner-badge" id="bannerActiveMode">ACTIVE CALENDAR NODE</div>
+      <div class="banner-metrics-row">
+        <div class="banner-stat"><span class="banner-lbl">Real-Time Reference Date:</span> <strong id="bannerRealTimeDate">-</strong></div>
+        <div class="banner-stat"><span class="banner-lbl">Cutoff Cycle Frame:</span> <strong id="bannerCycleFrame">-</strong></div>
+        <div class="banner-stat"><span class="banner-lbl">Cycle Pacing Track:</span> <strong id="bannerPacing">-</strong></div>
+      </div>
+    </div>
+
+
+    <div class="alert-system-card tracking-safe-state" id="liveAlertCard">
+      <div class="alert-header-row">
+        <div class="alert-title-block">
+          <span class="alert-icon" id="liveAlertIcon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </span>
+          <span class="alert-headline" id="liveAlertHeadline">Discipline Tracker: Within Allocated Limits</span>
+        </div>
+        <span class="alert-status-badge" id="liveAlertBadge">LIVE STATE</span>
+      </div>
+      <div class="alert-body-block">
+        <p class="alert-description" id="liveAlertDescription">Your dynamic expenditure profile for today is currently well paced within sustainable boundaries.</p>
+        <p class="alert-insight" id="liveAlertInsight">Smart Insight: Keeping a low tracking spend velocity expands tomorrow's rollover potential.</p>
+      </div>
+    </div>
+
+
+    <div class="overview-grid">
+
+      <div class="overview-card" id="cardTotalBudget">
+        <div class="metrics-card-header-row">
+          <span id="labelTotalBudget">Active Range Budget</span>
+          <span class="live-indicator-pill-badge">LIVE MONITOR</span>
+        </div>
+        <h2 id="overviewTotalBudget">₱0.00</h2>
+      </div>
+
+
+      <div class="overview-card" id="cardRemainingBudget">
+        <div class="metrics-card-header-row">
+          <span id="labelRemainingBudget">Remaining in Target Range</span>
+          <span class="live-indicator-pill-badge">LIVE MONITOR</span>
+        </div>
+        <h2 id="overviewRemainingBudget">₱0.00</h2>
+      </div>
+
+
+      <div class="overview-card" id="cardDailyBudget">
+        <div class="metrics-card-header-row">
+          <span id="labelDailyBudget">Live Recommended Daily</span>
+          <span class="live-indicator-pill-badge">LIVE MONITOR</span>
+        </div>
+        <h2 id="overviewDailyBudget">₱0.00</h2>
+      </div>
+
+
+      <div class="overview-card progress-card" id="cardProgressBudget">
+        <div class="metrics-card-header-row">
+          <span>Range Budget Progress</span>
+          <span class="live-indicator-pill-badge">LIVE MONITOR</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p id="progressText">0% Used</p>
+      </div>
+
+    </div>
+
+
+    <div class="calendar-wrapper">
+
+      <div class="calendar-top">
+        <button onclick="previousMonth()" class="nav-btn">←</button>
+        <h2 id="monthTitle"></h2>
+        <button onclick="nextMonth()" class="nav-btn">→</button>
+      </div>
+
+      <div class="calendar-days-header">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid"></div>
+
+    </div>
+
+  </div>
+
+
+  <div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <div>
+          <div class="modal-title-with-badge-row">
+            <h2 id="modalDate"></h2>
+            <span id="modalContextMarkerBadge" class="context-marker-badge">HISTORICAL LOG VIEW</span>
+          </div>
+          <p id="modalBudget"></p>
+        </div>
+
+        <div class="modal-header-right-action-block">
+          <div class="chronological-nav-button-group">
+            <button class="nav-btn-timeline" onclick="navigateDayTimeline(-1)">← Prev</button>
+            <button class="nav-btn-timeline" onclick="navigateDayTimeline(1)">Next →</button>
+          </div>
+          <button class="close-btn" onclick="closeModal()">✕</button>
+        </div>
+
+      </div>
+
+
+      <div class="no-expense-toggle-bar">
+        <label class="toggle-switch-container">
+          <input type="checkbox" id="noExpenseCheckbox" onchange="toggleNoExpenseStatus()" />
+          <span class="toggle-slider"></span>
+        </label>
+        <div class="toggle-label-block">
+          <span class="toggle-title">Mark as "No Expenses Today"</span>
+          <span class="toggle-desc">Locks day, flags verification status, and forces optimal rollover cascade.</span>
+        </div>
+      </div>
+
+
+      <div class="expense-inputs" id="modalInputFormRow">
+        <input type="text" id="expenseName" placeholder="Expense description" />
+        <input type="number" id="expenseAmount" placeholder="Amount" />
+        <button onclick="addExpense()">Add</button>
+      </div>
+
+
+      <div class="expense-table">
+        <div class="table-header">
+          <div>Description</div>
+          <div style="text-align: right; padding-right: 25px;">Cost / Actions</div>
+        </div>
+        <div id="expenseRows"></div>
+      </div>
+
+
+      <div class="summary-grid">
+        <div class="summary-card">
+          <span>Total Spent</span>
+          <h3 id="totalSpent"></h3>
+        </div>
+        <div class="summary-card">
+          <span>Balance</span>
+          <h3 id="balance"></h3>
+        </div>
+        <div class="summary-card">
+          <span>Tomorrow Budget</span>
+          <h3 id="tomorrowBudget"></h3>
+        </div>
+      </div>
+
+
+      <div class="offset-box" id="offsetBox">OFFSET</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal" style="max-width: 420px; text-align: center;">
+      <div id="confirmModalIcon" style="font-size: 46px; margin-bottom: 16px; color: var(--red);">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h2 id="confirmModalTitle" style="font-size: 24px; font-weight: 800; margin-bottom: 12px;">Confirm Action</h2>
+      <p id="confirmModalMessage" style="color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+        Are you sure you want to proceed with this action?
+      </p>
+      <div style="display: flex; gap: 12px;">
+        <button class="nav-btn-timeline" style="flex: 1; padding: 14px;" onclick="closeConfirmModal()">Cancel</button>
+        <button id="confirmModalSubmitBtn" style="flex: 1; padding: 14px; background: var(--red); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="toastContainer" style="position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 12px; z-index: 99999;"></div>
+
+  <script type="module" src="wallet.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Fixed Expenses</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="fixed-expenses.css">
+
+</head>
+
+<body>
+
+  <div class="page-wrapper">
+
+    <aside class="sidebar">
+
+      <div class="sidebar-top">
+
+        <div class="logo-box">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+
+        <div class="logo-text">
+          <h1>Wallet</h1>
+          <p>Fixed Expense Tracker</p>
+        </div>
+
+      </div>
+
+      <div class="sidebar-menu">
+
+        <a href="wallet.html" class="menu-item">
+          <i class="fa-solid fa-calendar-days"></i>
+          Daily Budget
+        </a>
+
+        <a href="fixed-expenses.html" class="menu-item active">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          Fixed Expenses
+        </a>
+
+      </div>
+
+    </aside>
+
+
+    <main class="main-content">
+
+      <div class="top-header">
+
+        <div>
+          <h2>Fixed Expenses</h2>
+
+          <p>
+            Track bills, necessities, subscriptions,
+            and recurring obligations separately from
+            your daily budget.
+          </p>
+        </div>
+
+        <div class="header-actions" style="display: flex; gap: 12px; align-items: center;">
+
+          <button
+            class="reset-cycle-btn"
+            onclick="resetFixedExpenses()"
+            style="cursor: pointer;"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset Cutoff Cycle
+          </button>
+
+          <button
+            class="add-btn"
+            onclick="openExpenseModal()"
+          >
+            <i class="fa-solid fa-plus"></i>
+            Add Fixed Expense
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="summary-grid">
+
+        <div 
+          class="summary-card editable-allocation-card" 
+          onclick="openAllocationModal()" 
+          style="cursor: pointer; position: relative;"
+          title="Click to edit budget allocation"
+        >
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Fixed Allocation</span>
+            <i class="fa-solid fa-pen-to-square edit-icon" style="opacity: 0.6; font-size: 14px;"></i>
+          </div>
+
+          <h3 id="fixedAllocationDisplay">
+            ₱0
+          </h3>
+
+        </div>
+
+        <div class="summary-card">
+
+          <span>Total Spent</span>
+
+          <h3 id="totalSpentDisplay">
+            ₱0
+          </h3>
+
+        </div>
+
+        <div class="summary-card">
+
+          <span>Remaining</span>
+
+          <h3 id="remainingDisplay">
+            ₱0
+          </h3>
+
+        </div>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Name</th>
+
+              <th>Category</th>
+
+              <th>Amount</th>
+
+              <th>Date</th>
+
+              <th>Actions</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody id="expenseTableBody">
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <div class="modal-overlay" id="expenseModal">
+
+    <div class="modal-card">
+
+      <button
+        class="close-btn"
+        onclick="closeExpenseModal()"
+      >
+        ×
+      </button>
+
+      <h2>Add Fixed Expense</h2>
+
+      <div class="input-group">
+
+        <label>Expense Name</label>
+
+        <input
+          type="text"
+          id="expenseName"
+          placeholder="Example: Electricity"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Category</label>
+
+        <select id="expenseCategory">
+
+          <option value="Bills">Bills</option>
+
+          <option value="Food">Food</option>
+
+          <option value="Shopping">Shopping</option>
+
+          <option value="Subscriptions">Subscriptions</option>
+
+          <option value="Utilities">Utilities</option>
+
+          <option value="Others">Others</option>
+
+        </select>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Amount</label>
+
+        <input
+          type="number"
+          id="expenseAmount"
+          placeholder="0.00"
+        >
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Date</label>
+
+        <input
+          type="date"
+          id="expenseDate"
+        >
+
+      </div>
+
+      <button
+        class="save-btn"
+        onclick="saveFixedExpense()"
+      >
+        Save Expense
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="modal-overlay" id="allocationModal">
+
+    <div class="modal-card" style="max-width: 420px;">
+
+      <button
+        class="close-btn"
+        onclick="closeAllocationModal()"
+      >
+        ×
+      </button>
+
+      <h2>Edit Allocation Limit</h2>
+
+      <div class="input-group">
+
+        <label>New Allocation Budget Limit (₱)</label>
+
+        <input
+          type="number"
+          id="customAllocationInput"
+          placeholder="Enter budget limit"
+        >
+
+      </div>
+
+      <button
+        class="save-btn"
+        onclick="saveAllocationSettings()"
+      >
+        Update Limit
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="modal-overlay" id="confirmModal">
+
+    <div class="modal-card confirm-card" style="max-width: 400px; text-align: center;">
+
+      <div class="confirm-icon-box" id="confirmModalIcon" style="font-size: 42px; margin-bottom: 16px; color: #ef4444;">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+
+      <h2 id="confirmModalTitle" style="margin-bottom: 12px; font-size: 22px;">Confirm Action</h2>
+
+      <p id="confirmModalMessage" style="color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.6; margin-bottom: 24px;">
+        Are you sure you want to proceed with this action?
+      </p>
+
+      <div class="confirm-actions-row" style="display: flex; gap: 12px;">
+
+        <button class="reset-cycle-btn" style="flex: 1; justify-content: center; margin: 0; padding: 14px;" onclick="closeConfirmModal()">Cancel</button>
+
+        <button class="save-btn" id="confirmModalSubmitBtn" style="flex: 1; height: auto; padding: 14px; background: #ef4444;">Proceed</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="toastContainer" style="position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 12px; z-index: 9999;"></div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="fixed-expenses.js"></script>
+
+</body>
+
+</html>

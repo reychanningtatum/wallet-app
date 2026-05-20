@@ -1,0 +1,296 @@
+# FULL UPDATED `login.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wallet Login</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="login.css">
+
+</head>
+
+<body>
+
+  <div class="auth-layout">
+
+    <!-- LEFT PANEL -->
+
+    <div class="auth-left-panel">
+
+      <div class="branding-overlay">
+
+        <div class="branding-content">
+
+          <div class="branding-center">
+
+            <div class="wallet-logo">
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+
+            <h1 class="branding-title">
+              Intelligent Financial
+              Management
+            </h1>
+
+            <p class="branding-subtitle">
+              Access your intelligent budgeting workspace
+              designed to optimize spending behavior,
+              improve financial discipline, and provide
+              adaptive real-time daily budget management.
+            </p>
+
+          </div>
+
+          <div class="branding-bottom">
+
+            <button class="mission-btn" onclick="openAboutModal()">
+              <span>📖</span>
+              Mission & Vision
+              <span class="arrow">→</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="auth-right-panel">
+
+      <div class="auth-card">
+
+        <div class="login-brand-top">
+
+          <div class="login-mini-logo">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+
+          <div class="login-brand-text">
+            <h2>Wallet</h2>
+            <p>Smart Dynamic Budget Calendar</p>
+          </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+
+          <label>Email</label>
+
+          <div class="input-wrapper">
+
+            <i class="fa-solid fa-envelope left-icon"></i>
+
+            <input
+              type="email"
+              id="authEmail"
+              placeholder="Enter your email"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="input-group">
+
+          <label>Password</label>
+
+          <div class="input-wrapper">
+
+            <i class="fa-solid fa-lock left-icon"></i>
+
+            <input
+              type="password"
+              id="authPassword"
+              placeholder="Enter password"
+            >
+
+            <i
+              class="fa-solid fa-eye right-icon"
+              onclick="togglePassword()"
+            ></i>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <button
+          class="primary-btn"
+          onclick="login()"
+        >
+          Login
+        </button>
+
+
+        <div class="divider">
+          <span>or</span>
+        </div>
+
+
+        <!-- CREATE ACCOUNT -->
+
+        <button
+          class="secondary-btn"
+          onclick="openRegisterModal()"
+        >
+          Create Account
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- REGISTER MODAL -->
+
+  <div class="modal-overlay" id="registerModal">
+
+    <div class="register-modal">
+
+      <button
+        class="close-btn"
+        onclick="closeRegisterModal()"
+      >
+        ×
+      </button>
+
+      <h2>Create Account</h2>
+
+      <p class="auth-subtitle">
+        Start building smarter financial habits.
+      </p>
+
+
+      <div class="input-group">
+
+        <label>Email</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-envelope left-icon"></i>
+
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter your email"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Password</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-lock left-icon"></i>
+
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Minimum 6 characters"
+          >
+
+          <i
+            class="fa-solid fa-eye right-icon"
+            onclick="toggleRegisterPassword()"
+          ></i>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        onclick="signUp()"
+      >
+        Create Account
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- MOBILE ABOUT BUTTON -->
+
+  <button
+    class="mobile-about-btn"
+    onclick="openAboutModal()"
+  >
+    About Wallet
+  </button>
+
+
+  <!-- ABOUT MODAL -->
+
+  <div class="about-modal" id="aboutModal">
+
+    <div class="about-modal-content">
+
+      <button class="close-about" onclick="closeAboutModal()">
+        ✕
+      </button>
+
+      <div class="about-top-line"></div>
+
+      <h2>Mission & Vision</h2>
+
+      <p>
+        Wallet was architected and engineered by
+        <b>Reychan Bernaldez</b> — a computer engineer and
+        entrepreneur focused on building intelligent financial
+        systems that help individuals develop a more disciplined,
+        data-driven, and sustainable approach toward real-time
+        daily budget management and long-term financial awareness.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script type="module" src="auth.js"></script>
+
+</body>
+
+</html>
+
+
+
