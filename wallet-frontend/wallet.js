@@ -1,5 +1,7 @@
 import { supabase } from './supabase.js'
 
+let activeThemeProfile = "violet";
+
 // 1. INITIALIZATION PIPELINE
 async function init() {
 
@@ -13,6 +15,8 @@ async function init() {
     return;
 
   }
+
+  loadSavedThemePreference();
 
   await loadExpensesFromCloud();
 
@@ -32,7 +36,7 @@ async function logout(){
 
 }
 
-// 2. REMOTE STORAGE MATRIX CALLS (NOW SECURELY SELECTS AND RETOURS THE CREATED ROW TO RE-LINK THE ID IMMEDIATELY)
+// 2. REMOTE STORAGE MATRIX CALLS
 async function saveExpenseToCloud(expenseData) {
 
   const {
@@ -363,7 +367,6 @@ function toggleBudgetDropdown(){
 }
 
 
-// TOGGLE THEMES DROPDOWN LAYOUT LAYER
 function toggleThemeDropdown(){
 
   themeDropdown.classList.toggle("active");
@@ -380,6 +383,8 @@ function changeTheme(themeName, element){
 
   document.body.classList.add(themeName);
 
+  activeThemeProfile = themeName;
+
   document
     .querySelectorAll(".theme-card")
     .forEach(card => {
@@ -388,7 +393,47 @@ function changeTheme(themeName, element){
 
     });
 
-  element.classList.add("active-theme");
+  if (element) {
+
+    element.classList.add("active-theme");
+
+  } else {
+
+    const matchingCard = document.querySelector(`.theme-card[data-theme="${themeName}"]`);
+
+    if (matchingCard) matchingCard.classList.add("active-theme");
+
+  }
+
+}
+
+// LOCAL STORAGE PERSISTENCE MECHANICS FOR SELECTED UI PROFILES (UPDATED TO AUTO-CLOSE MENUS ON SAVE)
+function saveThemePreference() {
+
+  localStorage.setItem("wallet_user_theme_node", activeThemeProfile);
+
+  showToast(`"${activeThemeProfile.toUpperCase()}" set as permanent theme allocation.`);
+
+  // Auto-close overlay layout immediately upon validation save completions
+  themeDropdown.classList.remove("active");
+
+}
+
+function loadSavedThemePreference() {
+
+  const savedTheme = localStorage.getItem("wallet_user_theme_node");
+
+  if (savedTheme) {
+
+    activeThemeProfile = savedTheme;
+
+    changeTheme(savedTheme, null);
+
+  } else {
+
+    changeTheme("violet", null);
+
+  }
 
 }
 
@@ -1090,7 +1135,7 @@ function updateOverview(){
 }
 
 
-// CALENDAR VIEW BUILDER RENDERER UTILITY
+/* CALENDAR VIEW BUILDER RENDERER UTILITY */
 function renderCalendar(){
 
   calendarGrid.innerHTML = "";
@@ -1363,7 +1408,7 @@ async function addExpense(){
 
   }
 
-  // Pure state push architecture prevents tracking gaps from ever building up
+
   const newLocalItem = {
 
     id: savedRow.id,
@@ -1435,7 +1480,6 @@ function deleteExpenseById(dbRecordRowId, localArrayItemIndex) {
 
       } else {
 
-        // Highly strategic fallback tracing parameters cleanup route
         const targetExpenseItem = day.expenses[localArrayItemIndex];
 
         if (!targetExpenseItem) return;
@@ -1459,7 +1503,7 @@ function deleteExpenseById(dbRecordRowId, localArrayItemIndex) {
 
       }
 
-      // Splice directly via targeted array index properties immediately inside confirmation sequence bounds
+
       const removedItem = day.expenses.splice(localArrayItemIndex, 1)[0];
 
       expenseDatabase[day.dateKey] = day.expenses;
@@ -1629,7 +1673,7 @@ function renderModalData(){
 
       row.classList.add("expense-row");
 
-      // BIND UNIQUE STRINGS DIRECTLY ON THE ELEMENT ATTRIBUTES TO SAFEGUARD PERSISTENT ROUTING PIPELINES
+
       row.innerHTML = `
 
         <div>
@@ -1782,6 +1826,7 @@ window.toggleThemeDropdown = toggleThemeDropdown;
 window.applyBudgetSettings = applyBudgetSettings;
 window.handleSalaryCycleChange = handleSalaryCycleChange;
 window.changeTheme = changeTheme;
+window.saveThemePreference = saveThemePreference;
 window.navigateDayTimeline = navigateDayTimeline;
 window.closeConfirmModal = closeConfirmModal;
 window.logout = logout;

@@ -69,8 +69,9 @@
             class="dropdown-menu budget-dropdown"
             id="budgetDropdown"
           >
+            <button class="dropdown-close-btn" onclick="toggleBudgetDropdown()">✕</button>
 
-            <div class="setup-section">
+            <div class="setup-section" style="margin-top: 10px;">
 
               <label>
                 Salary Cycle Type
@@ -202,159 +203,159 @@
             class="dropdown-menu theme-dropdown"
             id="themeDropdown"
           >
+            <button class="dropdown-close-btn" onclick="toggleThemeDropdown()">✕</button>
 
-            <div class="theme-grid">
+            <div class="theme-grid" style="margin-top: 18px;">
 
               <div
-                class="theme-card violet-theme active-theme"
+                class="theme-card violet-theme"
+                data-theme="violet"
                 onclick="changeTheme('violet', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Violet Neon</p>
-
               </div>
 
+              <div
+                class="theme-card noir-theme"
+                data-theme="noir"
+                onclick="changeTheme('noir', this)"
+              >
+                <div class="theme-colors">
+                  <span></span>
+                  <span></span>
+                </div>
+                <p>Midnight Noir</p>
+              </div>
 
               <div
                 class="theme-card emerald-theme"
+                data-theme="emerald"
                 onclick="changeTheme('emerald', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Emerald Luxe</p>
-
               </div>
 
 
               <div
                 class="theme-card ocean-theme"
+                data-theme="ocean"
                 onclick="changeTheme('ocean', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Ocean Blue</p>
-
               </div>
 
 
               <div
                 class="theme-card sunset-theme"
+                data-theme="sunset"
                 onclick="changeTheme('sunset', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Sunset Gold</p>
-
               </div>
 
 
               <div
                 class="theme-card crimson-theme"
+                data-theme="crimson"
                 onclick="changeTheme('crimson', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Crimson Red</p>
-
               </div>
 
 
               <div
                 class="theme-card cyber-theme"
+                data-theme="cyber"
                 onclick="changeTheme('cyber', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Cyber Punk</p>
-
               </div>
 
 
               <div
                 class="theme-card mint-theme"
+                data-theme="mint"
                 onclick="changeTheme('mint', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Mint Glass</p>
-
               </div>
 
 
               <div
                 class="theme-card midnight-theme"
+                data-theme="midnight"
                 onclick="changeTheme('midnight', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Midnight Gold</p>
-
               </div>
 
 
               <div
                 class="theme-card rose-theme"
+                data-theme="rose"
                 onclick="changeTheme('rose', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Rose Luxury</p>
-
               </div>
 
 
               <div
                 class="theme-card ice-theme"
+                data-theme="ice"
                 onclick="changeTheme('ice', this)"
               >
-
                 <div class="theme-colors">
                   <span></span>
                   <span></span>
                 </div>
-
                 <p>Ice Silver</p>
-
               </div>
 
             </div>
+
+            <button
+              class="save-budget-btn"
+              style="margin-top: 16px; background: linear-gradient(135deg, #374151, #111827); box-shadow: 0 4px 12px rgba(0,0,0,0.5);"
+              onclick="saveThemePreference()"
+            >
+              Save Theme Preference
+            </button>
 
           </div>
 

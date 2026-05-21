@@ -41,6 +41,18 @@ body.violet{
   --pink:#ec4899;
 }
 
+body.noir{
+  --bg:#000000;
+  --card:rgba(10, 10, 10, 0.85);
+  --card-hover:rgba(20, 20, 20, 0.9);
+  --card-2:#141414;
+  --text:#ffffff;
+  --muted:#6b7280;
+  --border:rgba(255, 255, 255, 0.05);
+  --violet:#ffffff;
+  --pink:#374151;
+}
+
 body.emerald{
   --bg:#020c08;
   --card:rgba(10, 26, 19, 0.7);
@@ -256,6 +268,35 @@ body{
 @keyframes fadeIn {
   from { opacity:0; transform:translateY(10px); }
   to { opacity:1; transform:translateY(0); }
+}
+
+/* ABSOLUTE DROPDOWN CLOSE BUTTON STYLING */
+.dropdown-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--card-2);
+  color: var(--text);
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: none;
+  border: 1px solid var(--border);
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.dropdown-close-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--pink);
+  transform: scale(1.05);
+  box-shadow: none;
 }
 
 .theme-dropdown{
@@ -1172,6 +1213,9 @@ button:hover{
 .violet-theme .theme-colors span:nth-child(1){background:#8b5cf6;}
 .violet-theme .theme-colors span:nth-child(2){background:#ec4899;}
 
+.noir-theme .theme-colors span:nth-child(1){background:#1f2937;}
+.noir-theme .theme-colors span:nth-child(2){background:#ffffff;}
+
 .emerald-theme .theme-colors span:nth-child(1){background:#10b981;}
 .emerald-theme .theme-colors span:nth-child(2){background:#34d399;}
 
@@ -1304,7 +1348,7 @@ button:hover{
     overflow-y: auto !important;
     right: unset !important;
     border-radius: var(--radius-lg);
-    padding: 20px;
+    padding: 24px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.8);
   }
   
