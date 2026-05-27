@@ -8,10 +8,16 @@ from google.genai import types
 
 app = FastAPI(title="Wallet AI Insights Core")
 
-# Enable secure cross-origin requests from your hosted frontend matrix
+# Enable secure cross-origin requests from both local machine and live GitHub website
+origins = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://reychanningtatum.github.io"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -117,4 +123,4 @@ async def generate_financial_insights(payload: AnalysisPayload):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
