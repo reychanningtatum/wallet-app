@@ -22,29 +22,42 @@
     }
     .container { max-width: 1000px; margin: auto; padding: 0 40px; }
     
+    /* Hero */
     .hero { text-align: center; padding: 140px 20px; }
-    .hero-logo { width: 500px; margin-bottom: 100px; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1)); }
+    .hero-logo { width: 100%; max-width: 500px; margin-bottom: 60px; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1)); }
     h1 { font-size: 80px; font-weight: 900; letter-spacing: -0.04em; margin-bottom: 24px; color: #020617; }
     .hero p { font-size: 22px; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
     .cta { background: #0F172A; color: #FFFFFF; padding: 22px 50px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; transition: 0.3s; }
     .cta:hover { background: var(--primary); transform: translateY(-4px); }
 
+    /* Features Grid */
     .section { padding: 120px 0; }
     .section-header { text-align: center; margin-bottom: 80px; }
     .bento-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
     .card { background: var(--card-bg); padding: 50px; border-radius: 32px; border: 1px solid #E2E8F0; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
     .card i { font-size: 32px; color: var(--primary); margin-bottom: 20px; }
     
+    /* Proof & Stats */
     .proof-section { text-align: center; padding: 80px 0; }
     .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
     .stats { display: flex; justify-content: space-around; padding: 80px 0; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; }
     .stat-item { text-align: center; }
     .stat-item h3 { font-size: 48px; margin: 0; }
     .founder-note { margin: 120px 0; text-align: center; padding: 80px; background: #020617; color: #FFFFFF; border-radius: 40px; }
+
+    /* MOBILE OPTIMIZATION */
+    @media (max-width: 768px) {
+      h1 { font-size: 48px; }
+      .container { padding: 0 20px; }
+      .bento-grid { grid-template-columns: 1fr; }
+      .proof-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats { flex-direction: column; gap: 40px; }
+      .hero { padding: 80px 20px; }
+      .founder-note { padding: 40px 20px; margin: 60px 0; }
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
     <section class="hero">
       <img src="images/fundly-logo2.png" alt="Fundly Logo" class="hero-logo">
@@ -56,26 +69,10 @@
     <section class="section">
       <div class="section-header"><h2>Architectural Financial Control</h2></div>
       <div class="bento-grid">
-        <div class="card">
-          <i class="fa-solid fa-gauge-high"></i>
-          <h3>Predictive Velocity</h3>
-          <p>We calculate where your wealth is heading. Fundly measures spending momentum to alert you before you break your budget thresholds.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-trophy"></i>
-          <h3>The Victory Streak</h3>
-          <p>Gamify your discipline. Our 'Audit Streaks' reward you for every zero-spend day, turning financial restraint into high-performance habit building.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-brain"></i>
-          <h3>Cognitive AI Synthesis</h3>
-          <p>Our engine distills complex ledger history into 4 daily, high-impact recommendations designed to optimize your capital retention instantly.</p>
-        </div>
-        <div class="card">
-          <i class="fa-solid fa-shield-halved"></i>
-          <h3>Sovereign Metadata</h3>
-          <p>Your financial story is your private asset. We provide the architecture; you retain absolute ownership and control over your data narrative.</p>
-        </div>
+        <div class="card"><i class="fa-solid fa-gauge-high"></i><h3>Predictive Velocity</h3><p>We calculate where your wealth is heading. Fundly measures spending momentum to alert you before you break your budget thresholds.</p></div>
+        <div class="card"><i class="fa-solid fa-trophy"></i><h3>The Victory Streak</h3><p>Gamify your discipline. Our 'Audit Streaks' reward you for every zero-spend day, turning financial restraint into high-performance habit building.</p></div>
+        <div class="card"><i class="fa-solid fa-brain"></i><h3>Cognitive AI Synthesis</h3><p>Our engine distills complex ledger history into 4 daily, high-impact recommendations designed to optimize your capital retention instantly.</p></div>
+        <div class="card"><i class="fa-solid fa-shield-halved"></i><h3>Sovereign Metadata</h3><p>Your financial story is your private asset. We provide the architecture; you retain absolute ownership and control over your data narrative.</p></div>
       </div>
     </section>
 
