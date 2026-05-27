@@ -873,7 +873,7 @@ async function generateFinancialInsights(){
 
   try {
     // FIXED: Strict string target configuration ensures it completely breaks out of port 3000
-    const response = await fetch("http://127.0.0.1:8000/api/insights", {
+    const response = await fetch("https://wallet-backend-ai.onrender.com/api/insights", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
