@@ -1,0 +1,84 @@
+/* ==========================================================================
+   FUNDLY FINTECH PREMIUM INTERACTION AUTH CARD SHEET
+   Theme: Clean White Honeycomb
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary: #8b5cf6;
+  --bg: #FFFFFF;
+  --text-pure: #0F172A;
+  --text-muted: #64748B;
+  --input-bg: #F8FAFC;
+  --border-light: #E2E8F0;
+  --border-focus: rgba(139, 92, 246, 0.45);
+  --radius-prime: 32px;
+  --radius-inner: 12px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+body {
+  background-color: var(--bg);
+  background-image: url('images/background_pattern.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+  color: var(--text-pure);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+}
+
+.auth-wrapper { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 20px; }
+
+.back-btn { 
+  display: inline-block; margin-bottom: 10px; color: var(--text-muted); 
+  text-decoration: none; font-size: 13px; font-weight: 600; text-align: center; 
+}
+.back-btn:hover { color: var(--primary); }
+
+.auth-card {
+  padding: 48px; border-radius: var(--radius-prime);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+}
+
+/* Centered Branding Logic */
+.login-brand-top { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; margin-bottom: 40px; }
+.login-mini-logo { width: 64px; height: 64px; border: 1px solid var(--border-light); border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+.login-mini-logo img { width: 65%; object-fit: contain; }
+.login-brand-text { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.login-brand-text h2 { color: var(--text-pure); font-size: 32px; font-weight: 900; letter-spacing: -0.04em; margin: 0; }
+.login-brand-text p { color: var(--text-muted); font-size: 14px; margin-top: 8px; text-align: center; }
+
+/* Inputs and Buttons remain standard */
+.input-group { margin-bottom: 24px; }
+.input-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.input-wrapper { position: relative; }
+.left-icon { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; }
+.right-icon { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); color: var(--text-muted); cursor: pointer; font-size: 13px; }
+.input-wrapper input { width: 100%; height: 50px; border: 1px solid var(--border-light); border-radius: var(--radius-inner); background: var(--input-bg); padding: 0 44px; outline: none; }
+.input-wrapper input:focus { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+
+.primary-btn { width: 100%; height: 50px; border: none; border-radius: var(--radius-inner); background: #0F172A; color: white; cursor: pointer; font-weight: 700; }
+.primary-btn:hover { background: var(--primary); }
+.secondary-btn { width: 100%; height: 50px; border: 1px solid var(--border-light); background: rgba(255, 255, 255, 0.02); cursor: pointer; border-radius: var(--radius-inner); font-weight: 600; color: var(--text-pure); }
+
+.divider { margin: 24px 0; display: flex; align-items: center; gap: 12px; color: var(--text-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border-light); }
+
+.auth-footer-actions { width: 100%; display: flex; justify-content: center; }
+.footer-manifesto-btn { background: transparent; border: none; color: var(--text-muted); font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+
+/* Modals */
+.modal-overlay, .about-modal { position: fixed; inset: 0; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+.register-modal, .about-modal-content { width: 100%; max-width: 400px; background: #FFFFFF; border: 1px solid var(--border-light); padding: 40px; border-radius: var(--radius-prime); position: relative; }
+.close-btn, .close-about { position: absolute; top: 24px; right: 24px; border: none; background: #f8fafc; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; }
+.about-top-line { width: 40px; height: 3px; border-radius: 999px; background: var(--primary); margin-bottom: 20px; }

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Fundly — Premium Authentication Portal</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="login.css">
+
+</head>
+
+<body>
+
+  <div class="auth-wrapper">
+
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> RETURN TO STRATEGY
+    </a>
+
+    <div class="auth-card">
+
+      <div class="login-brand-top">
+
+        <div class="login-mini-logo">
+          <img src="images/logo.png" alt="Fundly Digital Token" />
+        </div>
+
+        <div class="login-brand-text">
+          <h2>fundly</h2>
+          <p>Intelligent Dynamic Budget Workspace</p>
+        </div>
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Operational Email Address</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-envelope left-icon"></i>
+
+          <input
+            type="email"
+            id="authEmail"
+            placeholder="name@company.com"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>Security Access Code</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-lock left-icon"></i>
+
+          <input
+            type="password"
+            id="authPassword"
+            placeholder="••••••••"
+          >
+
+          <i
+            class="fa-solid fa-eye right-icon"
+            onclick="togglePassword()"
+          ></i>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        onclick="login()"
+      >
+        Sign In to Workspace
+      </button>
+
+
+      <div class="divider">
+        <span>Ecosystem Gateway</span>
+      </div>
+
+
+      <button
+        class="secondary-btn"
+        onclick="openRegisterModal()"
+      >
+        Initialize New Account Link
+      </button>
+
+    </div>
+
+    <div class="auth-footer-actions">
+      <button class="footer-manifesto-btn" onclick="openAboutModal()">
+        <i class="fa-solid fa-circle-info"></i> Mission & Vision Manifesto
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="modal-overlay" id="registerModal">
+
+    <div class="register-modal">
+
+      <button
+        class="close-btn"
+        onclick="closeRegisterModal()"
+      >
+        ×
+      </button>
+
+      <h2>Initialize Node</h2>
+
+      <p class="auth-subtitle">
+        Start building smarter, high-efficiency financial habits.
+      </p>
+
+
+      <div class="input-group">
+
+        <label>Registration Email Address</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-envelope left-icon"></i>
+
+          <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter target account email"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="input-group">
+
+        <label>System Account Password</label>
+
+        <div class="input-wrapper">
+
+          <i class="fa-solid fa-lock left-icon"></i>
+
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Minimum 6 secure data nodes"
+          >
+
+          <i
+            class="fa-solid fa-eye right-icon"
+            onclick="toggleRegisterPassword()"
+          ></i>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="primary-btn"
+        onclick="signUp()"
+      >
+        Confirm System Provisioning
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="about-modal" id="aboutModal">
+
+    <div class="about-modal-content">
+
+      <button class="close-about" onclick="closeAboutModal()">
+        ✕
+      </button>
+
+      <div class="about-top-line"></div>
+
+      <h2>Mission & Vision</h2>
+
+      <p>
+       Founded by Reychan Bernaldez, a computer engineer, entrepreneur, and sales executive with a passion for intelligent systems and behavioral finance, Fundly was created to redefine how individuals manage and understand money in everyday life. 
+      </p>
+      
+      <p style="margin-top: 15px;">
+   Combining expertise in technology, business strategy, and real-world financial behavior, Reychan envisioned a platform that goes beyond traditional budgeting — delivering adaptive financial pacing, real-time spending intelligence, and sustainable financial discipline designed for modern users.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <script type="module" src="auth.js"></script>
+
+</body>
+
+</html>
