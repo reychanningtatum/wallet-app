@@ -836,10 +836,96 @@ function updateCarryOvers(){
 
   }
 
-
   renderCalendar();
 
+  generateFinancialInsights();
+
   updateOverview();
+
+}
+
+
+// INTELLIGENT PYTHON-CONNECTED COGNITIVE ENGINE PIPELINE CALL
+// INTELLIGENT PYTHON-CONNECTED COGNITIVE ENGINE PIPELINE CALL
+async function generateFinancialInsights(){
+
+  const aiBox = document.getElementById("aiInsightsContent");
+
+  if(!aiBox) return;
+
+  // Clean data representation payload mapped directly to the schema layout
+  const payload = {
+    salaryCycle: salaryCycle,
+    rolloverMode: rolloverMode,
+    totalBudgetAmount: salaryCycle === "cutoff" ? (cutoff1Budget + cutoff2Budget) : totalBudgetAmount,
+    calendarDays: calendarDays.map(d => ({
+      dateKey: d.dateKey,
+      dayOfMonth: d.dayOfMonth,
+      budget: d.budget,
+      totalSpent: d.totalSpent,
+      balance: d.balance,
+      carryOver: d.carryOver,
+      cutoffAssignment: d.cutoffAssignment,
+      isNoExpenseMarked: d.isNoExpenseMarked
+    })),
+    expenseDatabase: expenseDatabase
+  };
+
+  try {
+    // FIXED: Strict string target configuration ensures it completely breaks out of port 3000
+    const response = await fetch("http://127.0.0.1:8000/api/insights", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if(!response.ok) {
+      throw new Error(`Server returned HTTP ${response.status}`);
+    }
+
+    const dataText = await response.json();
+    const parsedData = typeof dataText === "string" ? JSON.parse(dataText) : dataText;
+
+    if(parsedData && parsedData.insights && Array.isArray(parsedData.insights)) {
+      aiBox.innerHTML = parsedData.insights.map(text => `
+        <div class="ai-line">
+          ${text}
+        </div>
+      `).join("");
+    } else {
+      aiBox.innerHTML = `<div class="ai-line">⚠️ AI core infrastructure returned anomalous structural payloads.</div>`;
+    }
+
+  } catch(err) {
+    console.warn("Python Core Endpoint Offline. Initializing static rule engine fallbacks:", err);
+    
+    // Smooth automated system fallback matching the user's legacy calculation matrix
+    let insights = [];
+    let totalSpent = calendarDays.reduce((sum, d) => sum + d.totalSpent, 0);
+    let totalBudget = calendarDays.reduce((sum, d) => sum + d.budget, 0);
+    let remainingBudget = totalBudget - totalSpent;
+    
+    if (remainingBudget < (totalBudget * 0.15)) {
+      insights.push(`⚠️ Critical Warning: Your active range wallet tracking balance is running low.`);
+    } else {
+      insights.push(`✅ Core operational stability parameters remain secure within standard parameters.`);
+    }
+    
+    let noSpendCount = calendarDays.filter(d => d.totalSpent === 0).length;
+    if (noSpendCount >= 5) {
+      insights.push(`🏆 Excellent discipline score registered! You logged ${noSpendCount} clean zero spend nodes.`);
+    }
+    
+    insights.push(`💡 Tip: Initialize your local Python 'app.py' script stack to toggle advanced model generations.`);
+    
+    aiBox.innerHTML = insights.map(text => `
+      <div class="ai-line">
+        ${text}
+      </div>
+    `).join("");
+  }
 
 }
 
@@ -1695,7 +1781,7 @@ function renderModalData(){
           </span>
 
           <button class="inline-row-delete-btn" onclick="deleteExpenseById('${expense.id}', ${index})">
-            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
               <path d="M1 3.8H2.33333M2.33333 3.8H13M2.33333 3.8V13.6C2.33333 13.9713 2.47381 14.3274 2.72386 14.5899C2.97391 14.8525 3.31304 15 3.66667 15H10.3333C10.687 15 11.0261 14.8525 11.2761 14.5899C11.5262 14.3274 11.6667 13.9713 11.6667 13.6V3.8M4.33333 3.8V2.4C4.33333 2.0287 4.47381 1.6726 4.72386 1.41005C4.97391 1.1475 5.31304 1 5.66667 1H8.33333C8.68696 1 9.02609 1.1475 9.27614 1.41005C9.52619 1.6726 9.66667 2.0287 9.66667 2.4V3.8M5.66667 7.3V11.5M8.33333 7.3V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
